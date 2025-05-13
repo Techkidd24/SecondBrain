@@ -23,6 +23,18 @@ export function ShareBrain({ open, onClose }) {
         setShare(true)
 
     }
+
+    async function deleteLink(){
+        await axios.post(`${BACKEND_URL}/api/v1/brain/share`, {
+            share: false
+        },{
+            headers: {
+                "Authorization" : localStorage.getItem("token")
+            }
+        })
+        setUrl("");
+        setShare(false);
+    }
     return <div>
         {open && <div>
             <div className="w-screen h-screen top-0 left-0 fixed bg-slate-500 opacity-60 flex justify-center">
@@ -38,7 +50,7 @@ export function ShareBrain({ open, onClose }) {
                         </div>
                         <div className=" flex gap-4 justify-around mt-2">
                             <Button variant={share === true ? "primary" : "secondary"} text="Public" onClick={link} />
-                            <Button variant={share === false ? "primary" : "secondary"} text="Private" onClick={() => { setShare(false) }} />
+                            <Button variant={share === false ? "primary" : "secondary"} text="Private" onClick={deleteLink} />
                         </div>
                         {share && <div className="mt-2">
                             {url}

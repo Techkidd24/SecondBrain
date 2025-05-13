@@ -5,28 +5,35 @@ import axios from "axios";
 import { BACKEND_URL } from "../config";
 
 export function ShareBrainPage() {
-    const { shareLink }= useParams();
-    const [ notes, setNotes] = useState([]);
-    const [ username, setUsername ]= useState('');
-    const [ error, setError ]= useState('');
+    const { shareLink } = useParams();
+    const [notes, setNotes] = useState([]);
+    const [username, setUsername] = useState('');
+    const [error, setError] = useState('');
 
-    useEffect(()=>{
-        async function fetchSharedNotes(){
-            try{
-                const response= await axios.get(`${BACKEND_URL}/api/v1/brain/${shareLink}`);
+    useEffect(() => {
+        async function fetchSharedNotes() {
+            try {
+                const response = await axios.get(`${BACKEND_URL}/api/v1/brain/${shareLink}`);
                 setNotes(response.data.content);
                 setUsername(response.data.username);
-            }catch(e){
+            } catch (e) {
                 setError("This brain is private or does not exists.")
+                setNotes([]);
             }
         }
 
         fetchSharedNotes();
-    },[shareLink]);
+    }, [shareLink]);
 
-    return <div>
-        <div className='flex gap-4 ml-24 mt-4 flex-wrap'>
-            {notes.map((note) => <Card
+    if (error) {
+        return <div className="text-red-600 ml-24 mt-4">{error}</div>
+    } else {
+        return <div>
+            <div>
+                {username}'s Brain
+            </div>
+            <div className='flex gap-4 ml-24 mt-4 flex-wrap'>
+                {notes.map((note) => <Card
                     key={note._id}
                     id={note._id}
                     type={note.type}
@@ -34,6 +41,7 @@ export function ShareBrainPage() {
                     title={note.title}
                     tag={note.tag}
                 />)}
+            </div>
         </div>
-    </div>
+    }
 }

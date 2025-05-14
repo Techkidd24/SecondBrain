@@ -3,16 +3,23 @@ import { ReactElement } from "react";
 interface sideBarProps {
     text: string;
     icon: ReactElement;
+    onClick?: ()=>void;
+    isSelected?: boolean;   
 }
 
-export function SideBarItems({ text, icon }: sideBarProps) {
-    return <div className="flex text-gray-700 py-2 cursor-pointer hover:bg-gray-200 rounded max-w-48 pl-4 transition-all">
+export function SideBarItems({ text, icon, onClick, isSelected }: sideBarProps) {
+    return ( 
+    <div 
+        onClick={onClick}
+    className={`flex items-center gap-2 px-4 py-2 cursor-pointer rounded ${
+        isSelected ? "bg-indigo-100 text-indigo-700 font-semibold" : "text-gray-600"
+      }`}>
         <div className="pr-2">
             {icon}
         </div>
         <div>
             {text}
         </div>
-
     </div>
+    )
 }

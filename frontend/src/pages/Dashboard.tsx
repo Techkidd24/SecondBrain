@@ -9,6 +9,7 @@ import { useContent } from '../hooks/useContent'
 import { ShareBrain } from '../components/ui/ShareBrain'
 
 export function Dashboard() {
+  const [ selectedType, setSelectedType ]= useState("all");
   const [modalOpen, setModalOpen] = useState(false);
   const [shareBrain, setShareBrain] = useState(false);
   const [noteToEdit, setNoteToEdit] = useState<Content | null>(null);
@@ -16,7 +17,7 @@ export function Dashboard() {
   const { contents, fetchContent, deleteContent } = useContent();
   return (
     <div>
-      <SideBar />
+      <SideBar selectedType={selectedType} onSelect={(type)=>setSelectedType(type)}/>
       <div className='p-4 ml-72 min-h-screen bg-gray-100 border-2'>
         <CreateContentModal open={modalOpen} onClose={() => {
           setModalOpen(false)
@@ -41,9 +42,10 @@ export function Dashboard() {
         </div>
         <div className='flex gap-4 ml-24 mt-4 flex-wrap'>
           {contents.filter(note=>
+            (selectedType === "all" || note.type === selectedType) && (
             note.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
             note.tag?.some(t=> t.toLowerCase().includes(searchQuery.toLowerCase())) 
-          )
+          ))
           .map((note) => <Card
             key={note._id}
             id={note._id}

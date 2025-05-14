@@ -1,0 +1,5 @@
+export function Dashboard(){
+    return <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="25" height="25" viewBox="0 0 24 24">
+                    <image xlinkHref="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAeJJREFUSEuNVuuZwyAMk/doO08muaF6i3SeZhDfhx8gA2kvv5pgLGxLooL+CAAdr+1XfOKV8VsgUOhmG+dsy9eJbPPHDPV4m5MI5TgA/AK41TLs7QTwA+AVaxYrwM1rLocosQ7gQW9A755gU77ghOIRy28oIpbix8kayMPyEIAGlLVtakwMR8T6boG99mmMohHjeRYAP/z85JeM7+9Z8cDsU+sHzePmOGUzdY2SnBRXFfS13mXbltV6aVcVeKkJ8AbkPmi98HnMgHpxUYFtnlqCxqIngPs8rMq4HLIfoADEoLLAQGgjyPnG0XbcJ/mwDgigsqhlTRptNLJ8Gtpq/R7P20pehZMR1tfYfEBZlB+ERgCHAE8V3HPSxNYTgh9oKFlgQtt7lGWMIRcdcKVf/cewG583VuWfjI21RUQIpl3YRrRuKLn3clFyEMEEy0o+AP2v2e2V7JjpJA5A8G52i2Y6o3pf6eJgkmSqAs4AZHYVxWjqjS1m15pcbCv0NLqZM/DNS2m0+YvZFSlQBQWge+hUdlhFeFHU9sGuJzclQpLQlvugczviS+wsZQFOFTxmmg4DW/0grkF5hYMegDzHDUjXj8oJaL9edywgB++KyWt1/edxbS0klIWaLK5r19xrv97nf9cO+SICajl4AAAAAElFTkSuQmCC" x="0" y="0" width="24" height="24"/>
+                  </svg>
+}

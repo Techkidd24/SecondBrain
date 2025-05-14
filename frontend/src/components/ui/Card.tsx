@@ -19,7 +19,8 @@ export function Card({ title, link, type, onDelete, id, onEdit, tag}: cardProps)
     const getIcon = () => {
         if (type === "youtube") return <YoutubeIcon />;
         if (type === "twitter") return <TwitterIcon />;
-        return <Document />
+        
+        // return <Document />
     }
 
     return <div>

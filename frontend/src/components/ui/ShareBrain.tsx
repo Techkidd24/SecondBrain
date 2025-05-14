@@ -3,10 +3,18 @@ import { CrossIcon } from "../../icons/CrossIcon";
 import { Button } from "./Button";
 import axios from "axios";
 import { BACKEND_URL } from "../../config";
+import { Duplicate } from "../../icons/Duplicate";
 
 export function ShareBrain({ open, onClose }) {
     const [share, setShare] = useState(false);
     const [url, setUrl] = useState("");
+    const [copied, setCopied] = useState(false);
+
+    function handleCopy() {
+        navigator.clipboard.writeText(url);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 1500)
+    }
 
     async function link() {
         const response = await axios.post(`${BACKEND_URL}/api/v1/brain/share`, {
@@ -24,12 +32,12 @@ export function ShareBrain({ open, onClose }) {
 
     }
 
-    async function deleteLink(){
+    async function deleteLink() {
         await axios.post(`${BACKEND_URL}/api/v1/brain/share`, {
             share: false
-        },{
+        }, {
             headers: {
-                "Authorization" : localStorage.getItem("token")
+                "Authorization": localStorage.getItem("token")
             }
         })
         setUrl("");
@@ -52,9 +60,18 @@ export function ShareBrain({ open, onClose }) {
                             <Button variant={share === true ? "primary" : "secondary"} text="Public" onClick={link} />
                             <Button variant={share === false ? "primary" : "secondary"} text="Private" onClick={deleteLink} />
                         </div>
-                        {share && <div className="mt-2">
-                            {url}
+                        {share && <div className="mt-4 flex justify-around">
+                            <div className="mt-2 mx-2">
+                                {url}
+                            </div>
+                            <div onClick={handleCopy} className="py-2 px-4 mx-2 border rounded-md flex cursor-pointer hover:bg-slate-100">
+                                <div className="my-1 mx-1">
+                                    <Duplicate />
+                                </div>
+                                <button>Copy</button>
+                            </div>
                         </div>}
+                        {copied && <span className="text-green-600 text-xs ml-2">Copied!</span>}
                     </div>
                 </div>
             </div>
